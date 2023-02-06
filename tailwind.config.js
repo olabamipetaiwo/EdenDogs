@@ -16,48 +16,37 @@ module.exports = {
        body: ["Exo 2", "sans-serif"],
     },
     extend: {
-      borderRadius: {
-        xxs: "0.625rem",
-        half: "50%",
-      },
       fontSize: {
-        xxs: ["0.625rem", "0.75rem"],
-      },
-      minHeight: {
-        300: "18.75rem",
-      },
-      maxWidth: {
-        container: "68rem",
-      },
-      backgroundImage: {
-        badge: "url('/src/assets/badge.png')",
-      },
-      gridTemplateColumns: {
-        all__events: "repeat(auto-fit,15.625rem)",
-        // all__events: "repeat(auto-fit, minmax(15.625rem, 1fr))",
-        featured__events: "repeat(auto-fit, 32.75rem)",
-      },
+        header: ["40px", "48px"],
+        xxs: ["10px", "12px"],
+      },  
       colors: {
-        dark: "#2F2F2F",
+        primary: "#003D6D",
+        secondary: "#18425D",
         grey: {
-          one: "#6C757D",
-          two: "#E8E8E8",
-          three: "#EAEDF7",
-          four: "#6C757D",
+          50: " #F9FAFB",
+          100: "#F3F4F6",
+          200: "#E5E7EB",
+          300: "#4F4F4F",
+          500: "#6B7280",
+          700: "#374151",
+          800: "#1F2937",
+          dark: "#454545",
         },
-        primary: {
-          main: "#372AA4",
-          bg: "#F8F9FB",
+        neutral: {
+          200: "#F3F5F6",
+          600: "#848F9F",
+          700: "#5F738C",
+          800: "#4E5A6C",
+          900: "#353F50",
         },
-        secondary: {
-          main: "#FF6A2C",
-        },
+        "blue-100": "#EBF8FE",
+        "red-100": "#FBE9E9",
+        "green-100": "#F1FEF1",
       },
       screens: {
-        container: "68rem",
-      },
-      boxShadow: {
-        btn: "0px 4px 10px rgba(36, 79, 190, 0.1)",
+        xlg: "1080px",
+        tab: "900px",
       },
     },
   },
