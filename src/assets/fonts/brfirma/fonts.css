@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'BR Firma';
+  src: local('BR Firma'), url('./BR\ Firma\ Regular.otf'),
+    url('./BR\ Firma\ Thin.otf'), url('./BR\ Firma\ SemiBold.otf'),
+    url('./BR\ Firma\ Medium.otf'), url('./BR\ Firma\ Bold.otf'),
+    url('./BR\ Firma\ Light.otf') format('opentype');
+  font-style: normal;
+  font-display: swap;
+}
