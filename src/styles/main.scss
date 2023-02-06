@@ -4,39 +4,17 @@
 @tailwind utilities;
 
 // Tailwind Styles
-@layer components {
+@layer base {
   html {
-    font-family: 'BR Firma', sans-serif;
-    box-sizing: border-box;
-    text-rendering: optimizeLegibility;
-    text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
-    // font-size: 62.5%;
-    scroll-behavior: smooth;
-
-    @media only screen and (min-width: 96rem) {
-      font-size: 16px;
-    }
-
-    @media only screen and (max-width: 80rem) {
-      font-size: 15px;
-    }
-
-    @media only screen and (max-width: 48rem) {
-      font-size: 14px;
-    }
-
-    @media only screen and (max-width: 37.5rem) {
-      font-size: 12px;
-    }
+    font-family: 'Exo 2', sans-serif;
   }
 
   body {
-    font-family: 'BR Firma', sans-serif;
+    font-family: 'Exo 2', sans-serif;
   }
+}
 
+@layer components {
   .text-header {
     @apply font-display text-base text-dark font-semibold;
   }
@@ -68,3 +46,5 @@
     }
   }
 }
+
+ 

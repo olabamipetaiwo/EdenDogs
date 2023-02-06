@@ -13,7 +13,7 @@ module.exports = {
   darkMode: false,
   theme: {
     fontFamily: {
-      display: ["BR Firma", "sans-serif"],
+       body: ["Exo 2", "sans-serif"],
     },
     extend: {
       borderRadius: {
