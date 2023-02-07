@@ -9,4 +9,20 @@ const apiClient = axios.create({
   },
 });
 
+export const dogsURL = {
+  GET_ALL_BREEDS: "https://dog.ceo/api/breeds/list/all",
+  GET_BREED_DOGS: "https://dog.ceo/api/breed",
+  GET_RANDOM_DOGS: "https://dog.ceo/api/breed/hound/images",
+};
 
+export const getAllBreeds = async () => {
+  return apiClient.get(dogsURL.GET_ALL_BREEDS);
+};
+
+export const getBreedDogs = async (breed) => {
+  return apiClient.get(`${dogsURL.GET_BREED_DOGS}/${breed}/images`);
+};
+
+export const getRandomDogs = async () => {
+  return apiClient.get(`${dogsURL.GET_RANDOM_DOGS}`);
+};

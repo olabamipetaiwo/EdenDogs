@@ -1,7 +1,15 @@
 <template>
   <div class="custom-select" :tabindex="tabindex" @blur="open = false">
-    <div class="selected" :class="{ open: open }" @click="open = !open">
-      {{ selected }}
+    <div
+      v-if="selected"
+      class="selected"
+      :class="{ open: open }"
+      @click="open = !open"
+    >
+      {{ this.capitalize(selected) }}
+    </div>
+    <div v-else class="selected" :class="{ open: open }" @click="open = !open">
+      Select an option
     </div>
     <div class="items" :class="{ selectHide: !open }">
       <div
@@ -13,13 +21,15 @@
           $emit('input', option);
         "
       >
-        {{ option }}
+        {{ this.capitalize(option) }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { capitalize } from "vue";
+
 export default {
   name: "CustomSelct",
   props: {
@@ -40,16 +50,15 @@ export default {
   },
   data() {
     return {
-      selected: this.default
-        ? this.default
-        : this.options.length > 0
-        ? this.options[0]
-        : null,
+      selected: this.default ? this.default : null,
       open: false,
     };
   },
   mounted() {
     this.$emit("input", this.selected);
+  },
+  methods: {
+    capitalize,
   },
 };
 </script>
@@ -100,6 +109,22 @@ $green: #03a84e;
   left: 0;
   right: 0;
   z-index: 1;
+  height: 200px;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: none;
+    border-radius: 6px;
+  }
 }
 
 .custom-select .items div {

@@ -9,42 +9,25 @@
             Search By Dog Breed
           </h2>
 
-          <CustomSelect
-            :options="['Go', 'Python', 'Rust', 'Javascript']"
-            class="select"
-            @input="handleInput($event)"
-          />
-        </div>
-      </div>
+          <div class="load" v-if="fetchingBreeds">
+            <spinner />
+          </div>
 
-      <div
-        class="grid grid-cols-1 md:grid-cols -2 lg:grid-cols-3 gap-8 px-12 my-10 lg:my-20"
-      >
-        <div
-          v-for="(imgURL, index) in dogs"
-          :key="index"
-          class="flex flex-col items-start"
-        >
-          <figure
-            class="overflow-hidden rounded-2xl cursor-pointer w-full h-96"
-          >
-            <img
-              :src="imgURL"
-              :alt="`dogs${index}`"
-              class="w-full h-full object-cover origin-center transition-all transform hover:scale-150"
+          <div v-else class="w-full">
+            <p class="text-center" v-if="allBreeds.length < 1">
+              No Breeds at the moment
+            </p>
+            <CustomSelect
+              v-else
+              :options="allBreeds"
+              class="select"
+              @input="handleInput($event)"
             />
-          </figure>
-
-          <div class="w-full flex justify-end mt-4 grid-cols-1">
-            <button
-              class="btn"
-              @click="this.$router.push(`/dog/view/${index}`)"
-            >
-              View Details
-            </button>
           </div>
         </div>
       </div>
+
+      <ImagesContainer />
     </section>
   </BaseLayout>
 </template>
@@ -52,26 +35,27 @@
 <script>
 import BaseLayout from "@/layouts/BaseLayout.vue";
 import CustomSelect from "@/components/Select.vue";
+import ImagesContainer from "../containers/ImagesContainer.vue";
+
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Home",
-  components: { BaseLayout, CustomSelect },
-  data() {
-    return {
-      dogs: [
-        "https://images.dog.ceo/breeds/affenpinscher/n02110627_3286.jpg",
-        "https://images.dog.ceo/breeds/affenpinscher/n02110627_3409.jpg",
-        "https://images.dog.ceo/breeds/affenpinscher/n02110627_3730.jpg",
-        "https://images.dog.ceo/breeds/affenpinscher/n02110627_3841.jpg",
-        "https://images.dog.ceo/breeds/affenpinscher/n02110627_3972.jpg",
-        "https://images.dog.ceo/breeds/affenpinscher/n02110627_4086.jpg",
-        "https://images.dog.ceo/breeds/affenpinscher/n02110627_4130.jpg",
-      ],
-    };
+  components: { BaseLayout, CustomSelect, ImagesContainer },
+  mounted() {
+    this.fetchBreeds();
+    this.fetchRandomDogs();
+  },
+  data() {},
+  computed: {
+    ...mapState("dogs", ["allBreeds", "fetchingBreeds"]),
   },
   methods: {
-    handleInput($event) {
-      console.log("goood", $event);
+    ...mapActions("dogs", ["fetchBreeds", "fetchRandomDogs", "fetchBreedDogs"]),
+    handleInput(value) {
+      if (value) {
+        this.fetchBreedDogs(value);
+      }
     },
   },
 };
@@ -83,6 +67,20 @@ export default {
 
   @media (max-width: 630px) {
     width: 80%;
+  }
+}
+
+.load {
+  -webkit-animation: spinner 2s infinite alternate-reverse forwards;
+  animation: spinner 2s infinite alternate-reverse forwards;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg) scale(0.5);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
   }
 }
 </style>
