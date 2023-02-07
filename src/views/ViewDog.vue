@@ -1,6 +1,6 @@
 <template>
   <BaseLayout>
-    <h2>All Dogs</h2>
+    <h2>Single Dogs</h2>
   </BaseLayout>
 </template>
 
@@ -8,7 +8,7 @@
 import BaseLayout from "@/layouts/BaseLayout.vue";
 
 export default {
-  name: "Home",
+  name: "ViewDog",
   components: { BaseLayout },
   data() {},
 };
