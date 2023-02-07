@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
+import Home from "@/views/Home.vue";
+import ViewDog from "@/views/ViewDog.vue"
 
 const routes = [
   {
     path: "/",
     name: "Home",
     component: Home,
+  },
+   {
+    path: "/dog/:id",
+    name: "ViewDog",
+    component: ViewDog,
   },
 ];
 
