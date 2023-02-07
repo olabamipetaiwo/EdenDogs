@@ -28,4 +28,14 @@
       scrollbar-width: none;
     }
   }
+
+  .btn {
+    @apply border-2 text-green-200 border-green-200 bg-transparent py-3 px-4 rounded-md;
+    border-width: 1.375px;
+    min-width: 91px;
+
+    &:hover {
+      @apply bg-green-100 text-white border-green-100;
+    }
+  }
 }
