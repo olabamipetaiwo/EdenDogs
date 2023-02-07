@@ -13,13 +13,13 @@ module.exports = {
   darkMode: false,
   theme: {
     fontFamily: {
-       body: ["Exo 2", "sans-serif"],
+      body: ["Exo 2", "sans-serif"],
     },
     extend: {
       fontSize: {
         header: ["40px", "48px"],
         xxs: ["10px", "12px"],
-      },  
+      },
       colors: {
         primary: "#003D6D",
         secondary: "#18425D",
@@ -42,7 +42,10 @@ module.exports = {
         },
         "blue-100": "#EBF8FE",
         "red-100": "#FBE9E9",
-        "green-100": "#F1FEF1",
+        green: {
+          100: "#1d352a",
+          200: "#03a84e",
+        },
       },
       screens: {
         xlg: "1080px",
