@@ -12,8 +12,11 @@
     </figure>
 
     <div class="w-full flex justify-end mt-4 grid-cols-1">
-      <p>{{ imgURL }}</p>
-      <button class="btn" @click="this.$router.push(`/dog/view/${imgIndex}`)">
+      <button
+        v-if="getActiveBreed"
+        class="btn"
+        @click="this.$router.push(`/dog/view/${getActiveBreed}/${imgIndex}`)"
+      >
         View Details
       </button>
     </div>
@@ -21,6 +24,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "DogCard",
   props: {
@@ -37,6 +42,9 @@ export default {
       required: false,
       default: "fashionava",
     },
+  },
+  computed: {
+    ...mapGetters("dogs", ["getActiveBreed"]),
   },
 };
 </script>

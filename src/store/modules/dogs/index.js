@@ -8,11 +8,14 @@ export default {
     allDogs: [],
     fetchingBreeds: false,
     fetchingDogs: false,
+    fetchingDog: false,
+    activeBreed: null,
+    activeDog: null,
     error: null,
   },
   getters: {
-    getAllBreedsLength(state) {
-      return state.allBreeds.length;
+    getActiveBreed(state) {
+      return state.activeBreed;
     },
   },
   mutations: { ...dogsMutations },

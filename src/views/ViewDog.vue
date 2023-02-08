@@ -1,50 +1,61 @@
 <template>
   <BaseLayout>
-    <section class="grid gap-x-8 gap-16 p-12 information">
-      <figure class="overflow-hidden">
-        <img
-          class="w-full h-full object-cover origin-center transition-all transform hover:scale-110"
-          :src="imgURL"
-          alt="dog"
-        />
-      </figure>
+    <section class="grid grid-cols-1 gap-8 my-20 px-12" v-if="fetchingDog">
+      <loader v-for="_item in this.loaders" :key="_item" />
+    </section>
+    <section class="p-12" v-else>
+      <section class="grid gap-x-8 gap-16 information" v-if="activeDog">
+        <figure class="overflow-hidden" v-lazyload>
+          <img
+            class="w-full h-full object-cover origin-center transition-all transform hover:scale-110"
+            :data-url="activeDog.imgUrl"
+            :alt="activeDog.name"
+          />
+        </figure>
 
-      <div>
-        <h2 class="font-body font-bold text-green-200 text-2xl mb-4">
-          German Shepard
-        </h2>
-        <p>
-          Generally considered dogkind's finest all-purpose worker, the German
-          Shepherd Dog is a large, agile, muscular dog of noble character and
-          high intelligence. Loyal, confident, courageous, and steady, the
-          German Shepherd is truly a dog lover's delight. German Shepherd Dogs
-          can stand as high as 26 inches at the shoulder and, when viewed in
-          outline, presents a picture of smooth, graceful curves rather than
-          angles. The natural gait is a free-and-easy trot, but they can turn it
-          up a notch or two and reach great speeds. There are many reasons why
-          German Shepherds stand in the front rank of canine royalty, but
-          experts say their defining attribute is character: loyalty, courage,
-          confidence, the ability to learn commands for many tasks, and the
-          willingness to put their life on the line in defense of loved ones.
-          German Shepherds will be gentle family pets and steadfast guardians,
-          but, the breed standard says, there's a 'certain aloofness that does
-          not lend itself to immediate and indiscriminate friendships.'
-        </p>
-      </div>
+        <div>
+          <h2 class="font-body font-bold text-green-200 text-2xl mb-4">
+            {{ this.capitalize(activeDog.name) }}
+            <span> ({{ this.capitalize(activeDog.breed) }}) </span>
+          </h2>
+          <p>{{ activeDog.description }}</p>
+        </div>
+      </section>
+      <p v-else>Can't fetch information about this dog</p>
     </section>
   </BaseLayout>
 </template>
 
 <script>
 import BaseLayout from "@/layouts/BaseLayout.vue";
+import { mapActions, mapState } from "vuex";
+import { capitalize } from "vue";
+import Loader from "@/components/Loader.vue";
 
 export default {
   name: "ViewDog",
-  components: { BaseLayout },
+  components: { Loader, BaseLayout },
   data() {
     return {
-      imgURL: "https://images.dog.ceo/breeds/affenpinscher/n02110627_4130.jpg",
+      dogIndex: this.$route.params.id,
+      dogBreed: this.$route.params.breed,
+      loaders: Array(1)
+        .fill()
+        .map((v) => v),
     };
+  },
+  created() {
+    this.fetchSingleDog({
+      breed: this.$route.params.breed,
+      dogIndex: this.$route.params.id,
+    });
+  },
+  methods: {
+    ...mapActions("dogs", ["fetchSingleDog"]),
+    capitalize,
+  },
+  computed: {
+    ...mapState("dogs", ["activeDog", "fetchingDog"]),
   },
 };
 </script>
