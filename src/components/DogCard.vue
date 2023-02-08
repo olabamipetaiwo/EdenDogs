@@ -11,23 +11,28 @@
       />
     </figure>
 
-    <div class="w-full flex justify-end mt-4 grid-cols-1">
-      <button
+    <div class="w-full flex justify-end mt-4">
+      <Button
+        color="green"
+        customClass="w-full"
+        size="md"
+        outline="true"
         v-if="getActiveBreed"
-        class="btn"
         @click="this.$router.push(`/dog/view/${getActiveBreed}/${imgIndex}`)"
       >
-        View Details
-      </button>
+        <span class="capitalize">View Details</span>
+      </Button>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import Button from "./Button.vue";
 
 export default {
   name: "DogCard",
+  components: { Button },
   props: {
     imgURL: {
       type: String,
@@ -45,6 +50,23 @@ export default {
   },
   computed: {
     ...mapGetters("dogs", ["getActiveBreed"]),
+  },
+  data() {
+    return {
+      colors: [
+        "gray",
+        "yellow",
+        "orange",
+        "red",
+        "green",
+        "teal",
+        "blue",
+        "indigo",
+        "purple",
+        "pink",
+      ],
+      sizes: ["lg", "md", "sm"],
+    };
   },
 };
 </script>
