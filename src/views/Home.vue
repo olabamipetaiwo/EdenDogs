@@ -43,6 +43,7 @@ export default {
   name: "Home",
   components: { BaseLayout, CustomSelect, ImagesContainer },
   mounted() {
+    localStorage.clear();
     this.fetchBreeds();
     this.fetchBreedDogs("hound");
   },
