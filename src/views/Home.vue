@@ -44,7 +44,7 @@ export default {
   components: { BaseLayout, CustomSelect, ImagesContainer },
   mounted() {
     this.fetchBreeds();
-    this.fetchRandomDogs();
+    this.fetchBreedDogs("hound");
   },
   data() {},
   computed: {
