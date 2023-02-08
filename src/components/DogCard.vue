@@ -3,6 +3,7 @@
     <figure
       class="overflow-hidden rounded-2xl cursor-pointer w-full h-96"
       v-lazyload
+      @click="this.$router.push(`/dog/view/${getActiveBreed}/${imgIndex}`)"
     >
       <img
         :data-url="imgURL"
