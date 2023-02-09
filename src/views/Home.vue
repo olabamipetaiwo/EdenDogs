@@ -36,6 +36,7 @@
 import BaseLayout from "@/layouts/BaseLayout.vue";
 import CustomSelect from "@/components/Select.vue";
 import ImagesContainer from "../containers/ImagesContainer.vue";
+import { cleanCache } from "../utils/cache";
 
 import { mapState, mapActions } from "vuex";
 
@@ -43,7 +44,7 @@ export default {
   name: "Home",
   components: { BaseLayout, CustomSelect, ImagesContainer },
   mounted() {
-    localStorage.clear();
+    cleanCache();
     this.fetchBreeds();
     this.fetchBreedDogs("hound");
   },

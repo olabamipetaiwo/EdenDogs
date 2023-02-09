@@ -47,7 +47,7 @@ export const dogsActions = {
         const dogsResponse = result.data.message;
 
         if (dogsResponse.length > 0) {
-          writeToCache(payload, dogsResponse);
+          writeToCache("edenDogs", payload, dogsResponse);
           commit(FETCH_ALL_DOGS, {
             dogs: dogsResponse,
             activeBreed: payload,
@@ -86,7 +86,7 @@ export const dogsActions = {
         const result = await getBreedDogs(payload.breed);
         const dogsResponse = result.data.message;
         if (dogsResponse.length > 0) {
-          writeToCache(payload.breed, dogsResponse);
+          writeToCache("edenDogs", payload.breed, dogsResponse);
           const dogData = {
             name: faker.word.noun(),
             index: payload.dogIndex,

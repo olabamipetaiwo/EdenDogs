@@ -1,14 +1,14 @@
-const writeToCache = (key, data) => {
-  const cacheExists = localStorage.getItem("edenDogs");
+const writeToCache = (cacheKey, key, data) => {
+  const cacheExists = localStorage.getItem(cacheKey);
   if (cacheExists) {
-    const cacheData = readFromLocal("edenDogs");
+    const cacheData = readFromLocal(cacheKey);
     cacheData[key] = data;
-    localStorage.setItem("edenDogs", JSON.stringify(cacheData));
+    localStorage.setItem(cacheKey, JSON.stringify(cacheData));
   } else {
     const cache = {
       [key]: data,
     };
-    localStorage.setItem("edenDogs", JSON.stringify(cache));
+    localStorage.setItem(cacheKey, JSON.stringify(cache));
   }
 };
 
@@ -20,20 +20,24 @@ const keyExistsInLocal = (key) => {
   return localStorage.getItem(key) ? true : false;
 };
 
-const keyExistsInCache = (key) => {
-  const cacheData = readFromLocal("edenDogs");
+const keyExistsInCache = (cacheKey, key) => {
+  const cacheData = readFromLocal(cacheKey);
   return Object.prototype.hasOwnProperty.call(cacheData, key);
 };
 
-const checkCache = (key) => {
-  return keyExistsInLocal("edenDogs") && keyExistsInCache(key)
+const checkCache = (cacheKey, key) => {
+  return keyExistsInLocal(cacheKey) && keyExistsInCache(key)
     ? getCachedData(key)
     : null;
 };
 
-const getCachedData = (key) => {
-  const cacheData = readFromLocal("edenDogs");
+const getCachedData = (cacheKey, key) => {
+  const cacheData = readFromLocal(cacheKey);
   return cacheData[key];
 };
 
-export { writeToCache, checkCache };
+const cleanCache = () => {
+  localStorage.clear();
+};
+
+export { writeToCache, checkCache, cleanCache };
