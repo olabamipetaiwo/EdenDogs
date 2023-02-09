@@ -21,6 +21,7 @@
             v-else
             :options="allBreeds"
             class="select"
+            :default="activeBreed"
             @input="handleInput($event)"
           />
         </div>
@@ -39,7 +40,12 @@ export default {
   components: { CustomSelect, ErrorAlert },
   data() {},
   computed: {
-    ...mapState("dogs", ["allBreeds", "fetchingBreeds", "breedsError"]),
+    ...mapState("dogs", [
+      "allBreeds",
+      "fetchingBreeds",
+      "breedsError",
+      "activeBreed",
+    ]),
   },
   methods: {
     ...mapActions("dogs", ["fetchBreedDogs"]),
