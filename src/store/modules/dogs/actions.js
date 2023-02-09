@@ -75,9 +75,15 @@ export const dogsActions = {
         description: faker.lorem.sentences(20),
         trainability: faker.datatype.boolean(),
         protectiveness: faker.datatype.boolean(),
-        energy: faker.datatype.boolean(),
+        energy: faker.datatype.number({
+          min: 1,
+          max: 100,
+        }),
         weight: faker.datatype.float({ min: 10, max: 100, precision: 0.001 }),
-        max_life_expectancy: faker.datatype.number(20),
+        max_life_expectancy: faker.datatype.number({
+          min: 2,
+          max: 5,
+        }),
       };
       commit(FETCH_DOG, dogData);
     } else {
@@ -95,13 +101,19 @@ export const dogsActions = {
             description: faker.lorem.sentences(20),
             trainability: faker.datatype.boolean(),
             protectiveness: faker.datatype.boolean(),
-            energy: faker.datatype.boolean(),
+            energy: faker.datatype.number({
+              min: 1,
+              max: 100,
+            }),
             weight: faker.datatype.float({
               min: 10,
               max: 100,
               precision: 0.001,
             }),
-            max_life_expectancy: faker.datatype.number(20),
+            max_life_expectancy: faker.datatype.number({
+              min: 2,
+              max: 5,
+            }),
           };
           commit(FETCH_DOG, dogData);
         } else {
