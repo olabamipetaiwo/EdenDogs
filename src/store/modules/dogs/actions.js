@@ -23,7 +23,7 @@ export const dogsActions = {
       commit(FETCHING_BREEDS, true);
       try {
         const result = await getAllBreeds();
-        const breedsResponse = Object.keys(result.data.messagee);
+        const breedsResponse = Object.keys(result.data.message);
 
         if (breedsResponse.length > 0) {
           writeToCache("edenDogs", "allBreeds", breedsResponse);
@@ -58,7 +58,7 @@ export const dogsActions = {
       commit(FETCHING_DOGS, true);
       try {
         const result = await getBreedDogs(payload.breed);
-        const dogsResponse = result.data.messagee;
+        const dogsResponse = result.data.message;
 
         const formattedResponse = payload.inital
           ? dogsResponse.slice(0, 100)
@@ -114,7 +114,7 @@ export const dogsActions = {
       commit(FETCHING_DOG, true);
       try {
         const result = await getBreedDogs(payload.breed);
-        const dogsResponse = result.data.messagee;
+        const dogsResponse = result.data.message;
         if (dogsResponse.length > 0) {
           writeToCache("edenDogs", payload.breed, dogsResponse);
           const dogData = {
