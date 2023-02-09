@@ -19,9 +19,9 @@
           </p>
           <CustomSelect
             v-else
+            :default="activeBreed"
             :options="allBreeds"
             class="select"
-            :default="activeBreed"
             @input="handleInput($event)"
           />
         </div>

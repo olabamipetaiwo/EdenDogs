@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
-
-const CACHE_VALIDITY_IN_SECONDS = 60 * 60; //1 Hour;
+// const CACHE_VALIDITY_IN_SECONDS = 60 * 60; //1 Hour;
+const CACHE_VALIDITY_IN_SECONDS = 15; //1 Hour;
 
 const getTimestampInSeconds = () => {
   return Math.floor(Date.now() / 1000);
@@ -12,12 +11,26 @@ const writeToCache = (cacheKey, key, data) => {
     const cacheData = readFromLocal(cacheKey);
     cacheData[key] = data;
     localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+    saveCacheTimestamps(key);
   } else {
     const cache = {
       [key]: data,
     };
     localStorage.setItem(cacheKey, JSON.stringify(cache));
-    localStorage.setItem("cacheInit", getTimestampInSeconds());
+    saveCacheTimestamps(key);
+  }
+};
+
+const saveCacheTimestamps = (key) => {
+  if (localStorage.getItem("cacheInit")) {
+    const existingTimeStamps = JSON.parse(localStorage.getItem("cacheInit"));
+    existingTimeStamps[key] = getTimestampInSeconds();
+    localStorage.setItem("cacheInit", JSON.stringify(existingTimeStamps));
+  } else {
+    const cacheTimestamps = {
+      [key]: getTimestampInSeconds(),
+    };
+    localStorage.setItem("cacheInit", JSON.stringify(cacheTimestamps));
   }
 };
 
@@ -45,18 +58,32 @@ const checkCache = (cacheKey, key) => {
 };
 
 const cacheIsValid = (key) => {
-  const _cacheInit = Number(localStorage.getItem("cacheInit"));
-  const _now = getTimestampInSeconds();
-  const MAX_AGE = _cacheInit + CACHE_VALIDITY_IN_SECONDS;
-  const check = _now > MAX_AGE;
+  let response;
 
-  if (check) {
-    console.log("cache not valid");
-    return false;
+  if (localStorage.getItem("cacheInit")) {
+    if (keyExistsInCache("cacheInit", key)) {
+      const cacheStamps = readFromLocal("cacheInit");
+      const _cacheInit = Number(cacheStamps[key]);
+      const MAX_AGE = _cacheInit + CACHE_VALIDITY_IN_SECONDS;
+      const _now = getTimestampInSeconds();
+      const check = _now > MAX_AGE;
+      if (check) {
+        response = false;
+      } else {
+        response = true;
+      }
+    } else {
+      const existingTimeStamps = JSON.parse(localStorage.getItem("cacheInit"));
+      existingTimeStamps[key] = getTimestampInSeconds();
+      localStorage.setItem("cacheInit", JSON.stringify(existingTimeStamps));
+      response = true;
+    }
   } else {
-    console.log("cacheis  valid");
-    return true;
+    saveCacheTimestamps(key);
+    response = false;
   }
+
+  return response;
 };
 
 const getCachedData = (cacheKey, key) => {
