@@ -1,4 +1,4 @@
-const CACHE_REFRESH_TIME = 60 * 60; //1 Hour;
+const CACHE_REFRESH_TIME = 60 * 30; //30 moinutes
 // const CACHE_REFRESH_TIME = 15; //15secs test;
 
 const getTimestampInSeconds = () => {
