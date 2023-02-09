@@ -21,8 +21,6 @@ module.exports = {
         xxs: ["10px", "12px"],
       },
       colors: {
-        primary: "#003D6D",
-        secondary: "#18425D",
         grey: {
           50: " #F9FAFB",
           100: "#F3F4F6",
@@ -42,7 +40,7 @@ module.exports = {
         },
         "blue-100": "#EBF8FE",
         "red-100": "#FBE9E9",
-        green: {
+         green: {
           100: "#1d352a",
           200: "#03a84e",
         },
