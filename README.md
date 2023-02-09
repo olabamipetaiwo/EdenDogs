@@ -18,16 +18,17 @@ Github Repo: https://github.com/olabamipetaiwo/EdenDogs.git.
 Live Web App: https://edendogs.netlify.app/
 
 
-Git clone the repository via https://github.com/olabamipetaiwo/EdenDogs.git.
-Run yarn install to get the neccessary dependencies 
-Mirror .env.sample to create your env file locally
-Run yarn serve to start the application locally
+- Git clone the repository via https://github.com/olabamipetaiwo/EdenDogs.git.
+- Run yarn install to get the neccessary dependencies 
+- Mirror .env.sample to create your env file locally
+-Run yarn serve to start the application locally
 
-Approach Taken:
+**Approach Taken**
 
-Managed State with the Vuex Separated the Store into modules for the purpose of scalability (WE can decide to add authenticationn to the app later) Tailwind CSS and DartSCSS was used for the styling of the app
+- Managed State with the Vuex Separated the Store into modules for the purpose of scalability (WE can decide to add authenticationn to the app later) Tailwind CSS and DartSCSS was used for the styling of the app
+- Skeleton Loader and a spinner were used to indicate loading state
 
-Areas to improve upon: 
+**Areas For Improvement**
 
 Implemt server side pagination on the backend and  infinte scroll on the frontend for better user Experince
 Implemnt notification on frontend
