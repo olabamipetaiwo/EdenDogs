@@ -1,5 +1,5 @@
-const CACHE_VALIDITY_IN_SECONDS = 60 * 60; //1 Hour;
-// const CACHE_VALIDITY_IN_SECONDS = 15; //1 Hour;
+const CACHE_REFRESH_TIME = 60 * 30; //30 minutes
+// const CACHE_REFRESH_TIME = 15; //15secs test;
 
 const getTimestampInSeconds = () => {
   return Math.floor(Date.now() / 1000);
@@ -64,7 +64,7 @@ const cacheIsValid = (key) => {
     if (keyExistsInCache("cacheInit", key)) {
       const cacheStamps = readFromLocal("cacheInit");
       const _cacheInit = Number(cacheStamps[key]);
-      const MAX_AGE = _cacheInit + CACHE_VALIDITY_IN_SECONDS;
+      const MAX_AGE = _cacheInit + CACHE_REFRESH_TIME;
       const _now = getTimestampInSeconds();
       const check = _now > MAX_AGE;
       if (check) {
