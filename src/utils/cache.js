@@ -1,5 +1,5 @@
-// const CACHE_VALIDITY_IN_SECONDS = 60 * 60; //1 Hour;
-const CACHE_VALIDITY_IN_SECONDS = 15; //1 Hour;
+const CACHE_VALIDITY_IN_SECONDS = 60 * 60; //1 Hour;
+// const CACHE_VALIDITY_IN_SECONDS = 15; //1 Hour;
 
 const getTimestampInSeconds = () => {
   return Math.floor(Date.now() / 1000);
