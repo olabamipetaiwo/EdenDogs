@@ -1,5 +1,6 @@
 <template>
   <BaseLayout>
+    <error-alert :error="dogError" />
     <section class="grid grid-cols-1 gap-8 my-20 px-12" v-if="fetchingDog">
       <loader v-for="_item in this.loaders" :key="_item" />
     </section>
@@ -66,10 +67,11 @@ import BaseLayout from "@/layouts/BaseLayout.vue";
 import { mapActions, mapState } from "vuex";
 import { capitalize } from "vue";
 import Loader from "@/components/Loader.vue";
+import ErrorAlert from "@/components/ErrorAlert.vue";
 
 export default {
   name: "ViewDog",
-  components: { Loader, BaseLayout },
+  components: { Loader, BaseLayout, ErrorAlert },
   data() {
     return {
       loaders: Array(1)
@@ -88,14 +90,14 @@ export default {
     capitalize,
   },
   computed: {
-    ...mapState("dogs", ["activeDog", "fetchingDog"]),
+    ...mapState("dogs", ["activeDog", "fetchingDog", "dogError"]),
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .information {
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 350px 1fr;
 
   @media (max-width: 900px) {
     grid-template-columns: repeat(1, minmax(0, 1fr));

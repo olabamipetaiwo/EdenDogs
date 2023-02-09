@@ -11,20 +11,20 @@ import {
 
 export default {
   [FETCH_ALL_BREEDS](state, payload) {
-    state.allBreeds = payload;
+    state.breedsError = null;
     state.fetchingBreeds = false;
-    state.error = null;
+    state.allBreeds = payload;
   },
   [FETCH_ALL_DOGS](state, payload) {
-    state.allDogs = payload.dogs;
+    state.dogsError = null;
     state.fetchingDogs = false;
     state.activeBreed = payload.activeBreed;
-    state.error = null;
+    state.allDogs = payload.dogs;
   },
   [FETCH_DOG](state, payload) {
-    state.activeDog = payload;
+    state.dogError = null;
     state.fetchingDog = false;
-    state.error = null;
+    state.activeDog = payload;
   },
   [FETCHING_BREEDS](state, payload) {
     state.fetchingBreeds = payload;
@@ -36,9 +36,9 @@ export default {
     state.fetchingDog = payload;
   },
   [SET_ERROR](state, error) {
-    state.error = error;
+    state[error.key] = error.msg;
   },
-  [CLEAR_ERROR](state) {
-    state.error = null;
+  [CLEAR_ERROR](state, error) {
+    state[error] = null;
   },
 };

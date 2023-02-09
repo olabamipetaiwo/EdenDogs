@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { getAllBreeds, getBreedDogs } from "@/services/DogService";
 import {
   FETCH_ALL_BREEDS,
@@ -8,6 +7,7 @@ import {
   FETCH_DOG,
   FETCHING_DOG,
   SET_ERROR,
+  CLEAR_ERROR,
 } from "./types";
 import { faker } from "@faker-js/faker";
 
@@ -15,56 +15,80 @@ import { writeToCache, checkCache } from "@/utils/cache";
 
 export const dogsActions = {
   async fetchBreeds({ commit }) {
-    commit(FETCHING_BREEDS, true);
-    try {
-      const result = await getAllBreeds();
-      const breedsResponse = Object.keys(result.data.message);
+    const cachedData = checkCache("edenDogs", "allBreeds");
 
-      if (breedsResponse.length > 0) {
-        commit(FETCH_ALL_BREEDS, breedsResponse);
-      } else {
-        commit(FETCH_ALL_BREEDS, []);
-        commit(SET_ERROR, "No breeds available");
+    if (cachedData) {
+      commit(FETCH_ALL_BREEDS, cachedData);
+    } else {
+      commit(FETCHING_BREEDS, true);
+      try {
+        const result = await getAllBreeds();
+        const breedsResponse = Object.keys(result.data.messagee);
+
+        if (breedsResponse.length > 0) {
+          writeToCache("edenDogs", "allBreeds", breedsResponse);
+          commit(FETCH_ALL_BREEDS, breedsResponse);
+          commit(CLEAR_ERROR, "breedsError");
+        } else {
+          commit(FETCH_ALL_BREEDS, []);
+          commit(SET_ERROR, {
+            key: "breedsError",
+            msg: "No breeds available",
+          });
+        }
+      } catch (error) {
+        commit(SET_ERROR, {
+          key: "breedsError",
+          msg: "Error Occured fetching Breeds",
+        });
+        commit(FETCHING_BREEDS, false);
       }
-    } catch (error) {
-      commit(SET_ERROR, "Error Occured fetching Breeds");
-      commit(FETCHING_BREEDS, false);
     }
   },
 
   async fetchBreedDogs({ commit }, payload) {
-    const cachedData = checkCache(payload);
+    const cachedData = checkCache("edenDogs", payload.breed);
 
     if (cachedData) {
       commit(FETCH_ALL_DOGS, {
         dogs: cachedData,
-        activeBreed: payload,
+        activeBreed: payload.breed,
       });
     } else {
       commit(FETCHING_DOGS, true);
       try {
-        const result = await getBreedDogs(payload);
-        const dogsResponse = result.data.message;
+        const result = await getBreedDogs(payload.breed);
+        const dogsResponse = result.data.messagee;
+
+        const formattedResponse = payload.inital
+          ? dogsResponse.slice(0, 100)
+          : dogsResponse;
 
         if (dogsResponse.length > 0) {
-          writeToCache("edenDogs", payload, dogsResponse);
+          writeToCache("edenDogs", payload.breed, formattedResponse);
           commit(FETCH_ALL_DOGS, {
-            dogs: dogsResponse,
-            activeBreed: payload,
+            dogs: formattedResponse,
+            activeBreed: payload.breed,
           });
         } else {
           commit(FETCH_ALL_DOGS, []);
-          commit(SET_ERROR, "No dog available fo teh selected breed");
+          commit(SET_ERROR, {
+            key: "dogsError",
+            msg: "No dog available fo the selected breed",
+          });
         }
       } catch (error) {
-        commit(SET_ERROR, "Error Occured fetching Breeds");
+        commit(SET_ERROR, {
+          key: "dogsError",
+          msg: "Error Occured fetching Breed Dogs",
+        });
         commit(FETCHING_DOGS, false);
       }
     }
   },
 
   async fetchSingleDog({ commit }, payload) {
-    const cachedData = checkCache(payload.breed);
+    const cachedData = checkCache("edenDogs", payload.breed);
 
     if (cachedData) {
       const dogData = {
@@ -90,7 +114,7 @@ export const dogsActions = {
       commit(FETCHING_DOG, true);
       try {
         const result = await getBreedDogs(payload.breed);
-        const dogsResponse = result.data.message;
+        const dogsResponse = result.data.messagee;
         if (dogsResponse.length > 0) {
           writeToCache("edenDogs", payload.breed, dogsResponse);
           const dogData = {
@@ -117,10 +141,16 @@ export const dogsActions = {
           };
           commit(FETCH_DOG, dogData);
         } else {
-          commit(SET_ERROR, "No dog available for this selected breed");
+          commit(SET_ERROR, {
+            key: "dogError",
+            msg: "No dog available for this selected breed",
+          });
         }
       } catch (error) {
-        commit(SET_ERROR, "Error Occured fetching Breeds");
+        commit(SET_ERROR, {
+          key: "dogError",
+          msg: "Error Occured fetching Dog",
+        });
         commit(FETCHING_DOG, false);
       }
     }

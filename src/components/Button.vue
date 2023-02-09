@@ -13,11 +13,6 @@
 <script>
 export default {
   props: {
-    href: {
-      required: false,
-      type: String,
-      default: null,
-    },
     type: {
       type: String,
       default: "button",
@@ -59,11 +54,7 @@ export default {
       return `${this.colorClasses} ${this.sizeClasses} ${borderRadiusClasses}`;
     },
     buttonType() {
-      if (this.href) {
-        return "a";
-      } else {
-        return "button";
-      }
+      return "button";
     },
   },
 };

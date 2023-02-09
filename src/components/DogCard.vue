@@ -1,16 +1,17 @@
 <template>
   <div class="flex flex-col items-start">
-    <figure
-      class="overflow-hidden rounded-2xl cursor-pointer w-full h-96"
-      v-lazyload
-      @click="this.$router.push(`/dog/view/${getActiveBreed}/${imgIndex}`)"
-    >
-      <img
-        :data-url="imgURL"
-        :alt="`dogs${imgIndex}`"
-        class="w-full h-full object-cover origin-center transition-all transform hover:scale-150"
-      />
-    </figure>
+    <router-link class="w-full" :to="`/dog/view/${getActiveBreed}/${imgIndex}`">
+      <figure
+        class="overflow-hidden rounded-2xl cursor-pointer w-full h-96"
+        v-lazyload
+      >
+        <img
+          :data-url="imgURL"
+          :alt="`dogs${imgIndex}`"
+          class="w-full h-full object-cover origin-center transition-all transform hover:scale-150"
+        />
+      </figure>
+    </router-link>
 
     <div class="w-full flex justify-end mt-4">
       <Button
@@ -33,6 +34,7 @@ import Button from "./Button.vue";
 
 export default {
   name: "DogCard",
+  // eslint-disable-next-line vue/no-unused-components
   components: { Button },
   props: {
     imgURL: {

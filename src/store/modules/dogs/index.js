@@ -11,7 +11,9 @@ export default {
     fetchingDog: false,
     activeBreed: null,
     activeDog: null,
-    error: null,
+    breedsError: null,
+    dogsError: null,
+    dogError: null,
   },
   getters: {
     getActiveBreed(state) {
