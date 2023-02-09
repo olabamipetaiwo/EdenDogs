@@ -8,11 +8,23 @@
 2. Users should be able to click on a dog image and be routed to a page where there’s more information about the dog.
 3. Users should be able to search for a dog via their breeds.
 
-Pending
 
-Empty component
+Description Patricia events is a web app that allows a user to see a list of all upcoming events for a particular artist,search through it and book a ticket
 
-Suggestions
+Github Repo: ttps://github.com/olabamipetaiwo/EdenDogs.git.
 
-Implemt server side pagination for infinte scroll purpose
-implemnt notification on frontend
+Live Web App:https://edendogs.netlify.app/
+
+
+Git clone the repository via https://github.com/olabamipetaiwo/EdenDogs.git.
+Run yarn install to get the neccessary dependencies 
+Run yarn serve to start the application locally
+
+Approach Taken:
+
+Managed State with the Vuex Separated the Store into modules for the purpose of scalability (WE can decide to add authenticationn to the app later) Tailwind CSS and DartSCSS was used for the styling of the app
+
+Areas to improve upon: 
+
+Implemt server side pagination on the backend and  infinte scroll on the frontend for better user Experince
+Implemnt notification on frontend
