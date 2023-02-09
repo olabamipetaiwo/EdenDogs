@@ -1,6 +1,9 @@
-**Task::** Develop a SPA to consume a REST AP
+**Task::** Develop a SPA to consume a REST API
 
 **API to be consumed:** [https://dog.ceo/dog-api/](https://dog.ceo/dog-api/)
+
+
+Description EdenDogs is a web app that allows a user to see a list of dogs , search through it by their breeds and view more details on the dog.
 
 **Features the Application should have:**
 
@@ -9,22 +12,23 @@
 3. Users should be able to search for a dog via their breeds.
 
 
-Description Patricia events is a web app that allows a user to see a list of all upcoming events for a particular artist,search through it and book a ticket
 
-Github Repo: ttps://github.com/olabamipetaiwo/EdenDogs.git.
+Github Repo: https://github.com/olabamipetaiwo/EdenDogs.git.
 
-Live Web App:https://edendogs.netlify.app/
+Live Web App: https://edendogs.netlify.app/
 
 
-Git clone the repository via https://github.com/olabamipetaiwo/EdenDogs.git.
-Run yarn install to get the neccessary dependencies 
-Run yarn serve to start the application locally
+- Git clone the repository via https://github.com/olabamipetaiwo/EdenDogs.git.
+- Run yarn install to get the neccessary dependencies 
+- Mirror .env.sample to create your env file locally
+-Run yarn serve to start the application locally
 
-Approach Taken:
+**Approach Taken**
 
-Managed State with the Vuex Separated the Store into modules for the purpose of scalability (WE can decide to add authenticationn to the app later) Tailwind CSS and DartSCSS was used for the styling of the app
+- Managed State with the Vuex Separated the Store into modules for the purpose of scalability (WE can decide to add authenticationn to the app later) Tailwind CSS and DartSCSS was used for the styling of the app
+- Skeleton Loader and a spinner were used to indicate loading state
 
-Areas to improve upon: 
+**Areas For Improvement**
 
 Implemt server side pagination on the backend and  infinte scroll on the frontend for better user Experince
 Implemnt notification on frontend

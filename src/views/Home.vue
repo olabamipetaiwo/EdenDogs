@@ -11,7 +11,7 @@
 import BaseLayout from "@/layouts/BaseLayout.vue";
 import ImagesContainer from "../containers/ImagesContainer.vue";
 import BreedsContainer from "@/containers/BreedsContainer";
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Home",
@@ -22,9 +22,17 @@ export default {
   },
   mounted() {
     this.fetchBreeds();
-    this.fetchBreedDogs({ breed: "hound", initial: true });
+    // this.fetchBreedDogs({ breed: "hound", initial: true });
+
+    if (this.activeBreed) {
+      this.fetchBreedDogs({ breed: this.activeBreed, initial: false });
+    } else {
+      this.fetchBreedDogs({ breed: "hound", initial: true });
+    }
   },
-  data() {},
+  computed: {
+    ...mapState("dogs", ["activeBreed"]),
+  },
   methods: {
     ...mapActions("dogs", ["fetchBreeds", "fetchBreedDogs"]),
   },
