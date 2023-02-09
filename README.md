@@ -17,7 +17,7 @@ Live Web App: https://edendogs.netlify.app/
 - Git clone the repository via https://github.com/olabamipetaiwo/EdenDogs.git.
 - Run yarn install to get the neccessary dependencies
 - Mirror .env.sample to create your env file locally
-  -Run yarn serve to start the application locally
+- Run yarn serve to start the application locally
 
 **Approach Taken**
 
